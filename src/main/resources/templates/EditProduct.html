@@ -1,0 +1,6 @@
+<form th:action="@{/product/edit}" th:object="${product}" method="post">
+    <input type="hidden" th:field="*{productId}">
+    <input th:field="*{productName}" type="text">
+    <input th:field="*{productQuantity}" type="number">
+    <button type="submit">Update</button>
+</form>
