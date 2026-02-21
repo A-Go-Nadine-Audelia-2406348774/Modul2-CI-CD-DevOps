@@ -82,7 +82,7 @@ tasks.jacocoTestReport {
 
 sonar {
     properties {
-        property("sonar.projectKey", "a-go-nadine-audelia-2406348774")
+        property("sonar.projectKey", "A-Go-Nadine-Audelia-2406348774_Modul2-CI-CD-DevOps")
         property("sonar.organization", "a-go-nadine-audelia-2406348774")
         property("sonar.host.url", "https://sonarcloud.io")
     }
