@@ -1,19 +1,22 @@
-name: Continuous Integration (CI)
+name: SonarCloud
 
 on:
   push:
     branches: [ "main", "cicd", "module-2-exercise" ]
   pull_request:
     branches: [ "main", "cicd" ]
+  workflow_dispatch:   # opsional: bisa run manual
 
 jobs:
-  test:
-    name: Run unit tests
+  sonarcloud:
+    name: SonarCloud Analysis
     runs-on: ubuntu-22.04
 
     steps:
       - name: Check out the Git repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Java toolchain
         uses: actions/setup-java@v4
@@ -25,5 +28,8 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Run unit tests and JaCoCo report
-        run: ./gradlew test jacocoTestReport
+      - name: Run SonarCloud analysis
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: ./gradlew sonar --info
