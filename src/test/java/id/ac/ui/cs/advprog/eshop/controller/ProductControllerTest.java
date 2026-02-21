@@ -60,4 +60,25 @@ class ProductControllerTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("list"));
     }
+
+    @Test
+    void testEditProductPage() throws Exception {
+        Product product = new Product();
+        product.setProductId("abc");
+        product.setProductName("Sampo Cap Bambang");
+        product.setProductQuantity(100);
+        when(service.findById("abc")).thenReturn(product);
+        mockMvc.perform(get("/product/edit/abc"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("EditProduct"))
+                .andExpect(model().attributeExists("product"))
+                .andExpect(model().attribute("product", product));
+    }
+
+    @Test
+    void testDeleteProduct() throws Exception {
+        mockMvc.perform(get("/product/delete/abc"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("../list"));
+    }
 }

@@ -115,4 +115,35 @@ class ProductRepositoryTest {
         Product result = productRepository.findById("real-id");
         assertNotNull(result);
     }
+
+    @Test
+    void testFindByIdNotFound() {
+        Product product = new Product();
+        product.setProductId("id-asli");
+        product.setProductName("Produk Asli");
+        productRepository.create(product);
+        Product result = productRepository.findById("id-palsu");
+        assertNull(result);
+    }
+
+    @Test
+    void testFindByIdEmptyList() {
+        Product result = productRepository.findById("apa-saja");
+        assertNull(result);
+    }
+
+    @Test
+    void testUpdateProductNotFound() {
+        Product product = new Product();
+        product.setProductId("id-asli");
+        product.setProductName("Produk Asli");
+        product.setProductQuantity(10);
+        productRepository.create(product);
+        Product nonExistentProduct = new Product();
+        nonExistentProduct.setProductId("id-palsu");
+        nonExistentProduct.setProductName("Produk Palsu");
+        nonExistentProduct.setProductQuantity(5);
+        Product result = productRepository.update(nonExistentProduct);
+        assertNull(result);
+    }
 }
