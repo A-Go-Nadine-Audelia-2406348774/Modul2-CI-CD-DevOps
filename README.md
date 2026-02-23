@@ -3,7 +3,8 @@ NPM = 2406348774
 
 REFLECTION MODULE 2
 
-1. List the code quality issue(s) that you fixed during the exercise and explain your strategy on fixing them.
+1. List the code quality issue(s) that you fixed during the exercise and explain your strategy on fixing them. 
+
 Saya sempat mengalami isu peringatan keamanan kotlin:S6474 karena proyek menggunakan library eksternal tanpa verifikasi integritas, yang menyebabkan Security Hotspots pada SonarCloud. Awalnya cara saya membenarkan adalah dengan membuat verification-metadata.xml, tapi ternyata ada cara lain yang lebih praktis sehingga saya menghapus file verification-metadata.xml. Cara yang akhirnya saya pakai adalah pergi langsung ke web SonarCloud dan di bagian Security Hotspot saya ubah untuk menandainya menjadi Reviewed-Safe. Lebih baik pakai cara ini karena saya cukup yakin library yang saya gunakan itu terpercaya.
 Saya juga sempat mengalami masalah kegagalan di unit test dan yang saya lakukan untuk membenarkan isu itu adalah dengan memperbaiki method yang menjadi penyebab masalah dan menambahkan unit test agar bisa mencapai 100% coverage.
 
