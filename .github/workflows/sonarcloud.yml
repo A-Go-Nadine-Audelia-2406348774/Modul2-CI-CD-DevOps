@@ -5,7 +5,7 @@ on:
     branches: [ "main", "cicd", "module-2-exercise" ]
   pull_request:
     branches: [ "main", "cicd" ]
-  workflow_dispatch:   # opsional: bisa run manual
+  workflow_dispatch:   
 
 jobs:
   sonarcloud:
@@ -32,4 +32,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: ./gradlew sonar --info
+        run: ./gradlew test jacocoTestReport sonar --info
