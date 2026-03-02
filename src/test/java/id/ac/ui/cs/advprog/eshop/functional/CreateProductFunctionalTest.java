@@ -31,12 +31,12 @@ class CreateProductFunctionalTest {
     void createProduct_isSuccess(ChromeDriver driver) throws Exception {
         driver.get(baseUrl + "/product/create");
         driver.findElement(By.id("nameInput")).sendKeys("Sampo Cap Usep");
+        driver.findElement(By.id("quantityInput")).clear(); 
         driver.findElement(By.id("quantityInput")).sendKeys("50");
         driver.findElement(By.cssSelector("button[type='submit']")).click();
-
         String currentUrl = driver.getCurrentUrl();
         assertEquals(baseUrl + "/product/list", currentUrl);
-        WebElement productNameInList = driver.findElement(By.xpath("//td[contains(text(), 'Sampo Cap Usep')]"));
+        WebElement productNameInList = driver.findElement(By.xpath("//table//td[text()='Sampo Cap Usep']"));
         assertEquals("Sampo Cap Usep", productNameInList.getText());
     }
 }
